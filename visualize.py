@@ -51,6 +51,8 @@ def visualize(data_dirs, wav2mel_path, checkpoint_path, output_path):
             emb = dvector.embed_utterance(mel.to(device))
             emb = emb.detach().cpu().numpy()
         embs.append(emb)
+    
+    print(f"embs size: {len(embs)}")
 
     tsne = TSNE(n_components=2, verbose=1, perplexity=40, n_iter=300)
     transformed = tsne.fit_transform(embs)
@@ -72,6 +74,7 @@ def visualize(data_dirs, wav2mel_path, checkpoint_path, output_path):
         data=data,
         legend="full",
     )
+    plt.title('t-SNE of speaker dvector ')
     plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
     plt.tight_layout()
     plt.savefig(output_path)
