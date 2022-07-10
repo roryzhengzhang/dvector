@@ -16,6 +16,7 @@ class InfiniteDataLoader(torch.utils.data.DataLoader):
 
     def __iter__(self):
         for _ in range(len(self)):
+            print("Iter infinite dataloader")
             yield next(self.iterator)
 
 
