@@ -6,6 +6,7 @@ import torch
 class InfiniteDataLoader(torch.utils.data.DataLoader):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        print("Entering infinite dataloader")
         self._DataLoader__initialized = False
         self.batch_sampler = _RepeatSampler(self.batch_sampler)
         self._DataLoader__initialized = True
@@ -16,7 +17,6 @@ class InfiniteDataLoader(torch.utils.data.DataLoader):
 
     def __iter__(self):
         for _ in range(len(self)):
-            print("Iter infinite dataloader")
             yield next(self.iterator)
 
 
