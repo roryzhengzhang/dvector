@@ -7,11 +7,12 @@ class InfiniteDataLoader(torch.utils.data.DataLoader):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._DataLoader__initialized = False
-        print("Entering sampler...")
+       
         self.batch_sampler = _RepeatSampler(self.batch_sampler)
-        print("Exiting sampler...")
         self._DataLoader__initialized = True
+         print("Entering sampler...")
         self.iterator = super().__iter__()
+        print("Exiting sampler...")
 
     def __len__(self):
         return len(self.batch_sampler.sampler)
