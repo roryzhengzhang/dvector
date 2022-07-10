@@ -50,6 +50,7 @@ def train(
         metadata = json.load(f)
     print("create dataset...")
     dataset = GE2EDataset(data_dir, metadata["speakers"], n_utterances, seg_len)
+    print("prepare training and validation dataset...")
     trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
     train_loader = InfiniteDataLoader(
         trainset,
