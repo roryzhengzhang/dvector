@@ -50,7 +50,7 @@ def train(
         metadata = json.load(f)
     print("create dataset...")
     dataset = GE2EDataset(data_dir, metadata["speakers"], n_utterances, seg_len)
-    print("prepare training and validation dataset...")
+    print("create training data loader...")
     trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
     train_loader = InfiniteDataLoader(
         trainset,
@@ -59,6 +59,7 @@ def train(
         collate_fn=collate_batch,
         drop_last=True,
     )
+    print("create validation data loader...")
     valid_loader = InfiniteDataLoader(
         validset,
         batch_size=n_speakers,
@@ -66,7 +67,9 @@ def train(
         collate_fn=collate_batch,
         drop_last=True,
     )
+    print("prepare training data loader...")
     train_iter = infinite_iterator(train_loader)
+    print("prepare validation data loader...")
     valid_iter = infinite_iterator(valid_loader)
 
     # display training infos
