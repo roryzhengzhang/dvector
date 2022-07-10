@@ -44,6 +44,7 @@ class GE2EDataset(Dataset):
         return len(self.infos)
 
     def __getitem__(self, index):
+        print("getitem calleds")
         feature_paths = random.sample(self.infos[index], self.n_utterances)
         uttrs = [
             torch.load(Path(self.data_dir, feature_path))
