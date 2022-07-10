@@ -32,6 +32,7 @@ class GE2EDataset(Dataset):
         self.infos = []
 
         for uttr_infos in speaker_infos.values():
+            print(f"uttr_infos: {uttr_infos}")
             feature_paths = [
                 uttr_info["feature_path"]
                 for uttr_info in uttr_infos
@@ -44,7 +45,6 @@ class GE2EDataset(Dataset):
         return len(self.infos)
 
     def __getitem__(self, index):
-        print("getitem calleds")
         feature_paths = random.sample(self.infos[index], self.n_utterances)
         uttrs = [
             torch.load(Path(self.data_dir, feature_path))
