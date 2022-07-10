@@ -48,7 +48,6 @@ def train(
     # create data loader, iterator
     with open(Path(data_dir, "metadata.json"), "r") as f:
         metadata = json.load(f)
-    print(f"metadata: {metadata}")
     print("create dataset...")
     dataset = GE2EDataset(data_dir, metadata["speakers"], n_utterances, seg_len)
     trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
