@@ -73,6 +73,7 @@ def train(
     valid_iter = infinite_iterator(valid_loader)
 
     # display training infos
+    print(f"trainset: {len(trainset)}, validset: {len(validset)}, n_speakers: {n_speakers}")
     assert len(trainset) >= n_speakers
     assert len(validset) >= n_speakers
     print(f"[INFO] Use {len(trainset)} speakers for training.")
