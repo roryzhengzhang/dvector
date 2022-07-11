@@ -13,7 +13,7 @@ from pathlib import Path
 import torch
 from torch.optim import SGD
 from torch.optim.lr_scheduler import StepLR
-from torch.utils.data import random_split
+from torch.utils.data import random_split, DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
 
@@ -52,7 +52,7 @@ def train(
     dataset = GE2EDataset(data_dir, metadata["speakers"], n_utterances, seg_len)
     print("create training data loader...")
     trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
-    train_loader = InfiniteDataLoader(
+    train_loader = DataLoader(
         trainset,
         batch_size=n_speakers,
         num_workers=n_workers,
@@ -60,7 +60,7 @@ def train(
         drop_last=True,
     )
     print("create validation data loader...")
-    valid_loader = InfiniteDataLoader(
+    valid_loader = DataLoader(
         validset,
         batch_size=n_speakers,
         num_workers=n_workers,
