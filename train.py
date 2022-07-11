@@ -153,7 +153,7 @@ if __name__ == "__main__":
     PARSER = ArgumentParser()
     PARSER.add_argument("data_dir", type=str)
     PARSER.add_argument("model_dir", type=str)
-    PARSER.add_argument("-n", "--n_speakers", type=int, default=12)
+    PARSER.add_argument("-n", "--n_speakers", type=int, default=2)
     PARSER.add_argument("-m", "--n_utterances", type=int, default=30)
     PARSER.add_argument("--seg_len", type=int, default=160)
     PARSER.add_argument("--save_every", type=int, default=500)
