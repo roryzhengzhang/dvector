@@ -159,7 +159,7 @@ if __name__ == "__main__":
     # -n specifies the number of speakers used for validation
     PARSER.add_argument("-n", "--n_speakers", type=int, default=0)
     PARSER.add_argument("-m", "--n_utterances", type=int, default=200)
-    PARSER.add_argument("-m", "--n_val_utterances", type=int, default=50)
+    PARSER.add_argument("-m_val", "--n_val_utterances", type=int, default=50)
     PARSER.add_argument("--seg_len", type=int, default=160)
     PARSER.add_argument("--save_every", type=int, default=500)
     PARSER.add_argument("--valid_every", type=int, default=500)
