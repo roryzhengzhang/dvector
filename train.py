@@ -40,7 +40,6 @@ def train(
     # setup job name
     start_time = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     job_name = f"{start_time}_{comment}" if comment is not None else start_time
-
     # setup checkpoint and log dirs
     checkpoints_path = Path(model_dir) / "checkpoints" / job_name
     checkpoints_path.mkdir(parents=True, exist_ok=True)
