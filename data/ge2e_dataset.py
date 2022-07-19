@@ -31,12 +31,13 @@ class GE2EDataset(Dataset):
         self.seg_len = seg_len
         self.infos = []
 
-        for uttr_infos in speaker_infos.values():
+        for speaker, uttr_infos in zip(speaker_infos.keys(), speaker_infos.values()):
             feature_paths = [
                 uttr_info["feature_path"]
                 for uttr_info in uttr_infos
                 if uttr_info["mel_len"] > seg_len
             ]
+            print(f"speaker: {speaker}, len of uttrs: {len(feature_paths)}")
             if len(feature_paths) > n_utterances:
                 self.infos.append(feature_paths)
 
