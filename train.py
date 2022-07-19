@@ -49,8 +49,9 @@ def train(
     # create data loader, iterator
     with open(Path(data_dir, "metadata.json"), "r") as f:
         metadata = json.load(f)
-    print("create dataset...")
+    print("create training dataset...")
     trainset = GE2EDataset(data_dir, { k: v for k, v in metadata["speakers"].items() if k in ['english_train', 'spanish_train']}, n_utterances, seg_len)
+    print("create val dataset...")
     validset = GE2EDataset(data_dir, { k: v for k, v in metadata["speakers"].items() if k in ['english_val', 'spanish_val']}, n_val_utterances, seg_len)
     print("create training data loader...")
     # trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
@@ -158,7 +159,7 @@ if __name__ == "__main__":
     # -n specifies the number of speakers used for validation
     PARSER.add_argument("-n", "--n_speakers", type=int, default=2)
     PARSER.add_argument("-m", "--n_utterances", type=int, default=50)
-    PARSER.add_argument("-m_val", "--n_val_utterances", type=int, default=50)
+    PARSER.add_argument("-m_val", "--n_val_utterances", type=int, default=30)
     PARSER.add_argument("--seg_len", type=int, default=160)
     PARSER.add_argument("--save_every", type=int, default=500)
     PARSER.add_argument("--valid_every", type=int, default=500)
