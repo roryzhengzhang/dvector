@@ -18,7 +18,7 @@ class Wav2Mel(nn.Module):
         fft_window_ms: float = 25.0,
         fft_hop_ms: float = 10.0,
         f_min: float = 50.0,
-        n_mels: int = 40,
+        n_mels: int = 80,
     ):
         super().__init__()
 
