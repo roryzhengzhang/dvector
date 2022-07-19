@@ -53,7 +53,6 @@ def train(
     trainset = GE2EDataset(data_dir, { k: v for k, v in metadata["speakers"].items() if k in ['english_train', 'spanish_train']}, n_utterances, seg_len)
     validset = GE2EDataset(data_dir, { k: v for k, v in metadata["speakers"].items() if k in ['english_val', 'spanish_val']}, n_val_utterances, seg_len)
     print("create training data loader...")
-    print(f"dataset size: {len(dataset)}")
     # trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
     train_loader = DataLoader(
         trainset,
