@@ -135,7 +135,7 @@ def train(
             for _ in range(batch_per_valid):
                 batch = next(valid_iter).to(device)
                 with torch.no_grad():
-                    embd = dvector(batch).view(n_speakers, n_utterances, -1)
+                    embd = dvector(batch).view(n_speakers, n_val_utterances, -1)
                     loss = criterion(embd)
                     running_valid_loss.append(loss.item())
 
