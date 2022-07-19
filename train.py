@@ -26,6 +26,7 @@ def train(
     model_dir,
     n_speakers,
     n_utterances,
+    n_val_utterances,
     seg_len,
     save_every,
     valid_every,
@@ -49,10 +50,11 @@ def train(
     with open(Path(data_dir, "metadata.json"), "r") as f:
         metadata = json.load(f)
     print("create dataset...")
-    dataset = GE2EDataset(data_dir, metadata["speakers"], n_utterances, seg_len)
+    trainset = GE2EDataset(data_dir, { k: v for k, v in metadata["speakers"].items() if k in ['english_train', 'spanish_train']}, n_utterances, seg_len)
+    validset = GE2EDataset(data_dir, { k: v for k, v in metadata["speakers"].items() if k in ['english_val', 'spanish_val']}, n_val_utterances, seg_len)
     print("create training data loader...")
     print(f"dataset size: {len(dataset)}")
-    trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
+    # trainset, validset = random_split(dataset, [len(dataset) - n_speakers, n_speakers])
     train_loader = DataLoader(
         trainset,
         batch_size=n_speakers,
@@ -156,7 +158,8 @@ if __name__ == "__main__":
     PARSER.add_argument("model_dir", type=str)
     # -n specifies the number of speakers used for validation
     PARSER.add_argument("-n", "--n_speakers", type=int, default=0)
-    PARSER.add_argument("-m", "--n_utterances", type=int, default=80)
+    PARSER.add_argument("-m", "--n_utterances", type=int, default=200)
+    PARSER.add_argument("-m", "--n_val_utterances", type=int, default=50)
     PARSER.add_argument("--seg_len", type=int, default=160)
     PARSER.add_argument("--save_every", type=int, default=500)
     PARSER.add_argument("--valid_every", type=int, default=500)
