@@ -156,7 +156,7 @@ if __name__ == "__main__":
     PARSER.add_argument("data_dir", type=str)
     PARSER.add_argument("model_dir", type=str)
     # -n specifies the number of speakers used for validation
-    PARSER.add_argument("-n", "--n_speakers", type=int, default=0)
+    PARSER.add_argument("-n", "--n_speakers", type=int, default=2)
     PARSER.add_argument("-m", "--n_utterances", type=int, default=200)
     PARSER.add_argument("-m_val", "--n_val_utterances", type=int, default=50)
     PARSER.add_argument("--seg_len", type=int, default=160)
